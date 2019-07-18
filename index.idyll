@@ -1,0 +1,155 @@
+[meta title:"Understanding Anti-Scales" /]
+
+[Header
+  fullWidth:true
+  title:"Understanding Anti-Scales"
+  subtitle:"Thinking mathematically in the music theory"
+/]
+
+Skimming some [12tone](https://www.youtube.com/channel/UCTUtqcDkzw7bisadh6AOx5w) videos, I have found this piece of gold:
+
+[Youtube
+  id:"u9LsHdn0iJE"
+  width:500
+  height:300
+/]
+
+In this video, the 12tone guy introduces the idea of *anti-scales* and *anti-scale equivalence*. Given a data set of all 7 tone scales (equal tempered), he discovers some interesting properties of these concepts. While expressing some thoughts about these relations, he ends the video with the open question: “what does that *mean*?”.
+
+The art of programming can give you data and insight, but it cannot give you understanding. To understand relations, you need something else. You need the ancient art called *mathematics*.
+
+# Algebra at play
+
+Algebra is the art of notating things in such a way that important relations become obvious. Unfortunatelly, the music set theory has no notation for scales. So let's invent one.
+
+First, we should define a scale. Usually, a scale is thought as an ordered set of pitches. Like so
+
+[Aside]With numbers it's [Equation](0, 2, 4, 6, 7, 9, 10)[/Equation].[/Aside]
+[Equation display:true](\mathrm{C}, \mathrm{D}, \mathrm{E},\mathrm{F\sharp}, \mathrm{G}, \mathrm{A}, \mathrm{B\flat})[/Equation]
+
+[Aside]In the music set theory, pitches modulo octave are called *pitch classes*. Because this is a rather clumsy name, I may sometimes use the word *note* for the same thing.[/Aside]
+The problem with such definiton is, ordered sets are kinda awkward to work with. Fortunately, we do not need them. If we know the tonic (the first), we can easily group all remaining pitched in the ascending order.
+
+**Definition:** A scale is a pair of a pitch class (called the *tonic*) and an (unordered) pitch class set such as the tonic is in the set.
+
+With this definiton, we can write out scale as
+
+[Equation display:true](\mathrm{C}, p), \text{where } p = \{ \mathrm{C}, \mathrm{D}, \mathrm{E},\mathrm{F\sharp}, \mathrm{G}, \mathrm{A}, \mathrm{B\flat} \}[/Equation]
+
+There are two natural operations arising from this definiton:
+
+[Equation display:true]
+\begin{aligned}
+\operatorname{tonic}\ (N, p) &= N \\
+\operatorname{set}\ (N, p) &= p
+\end{aligned}
+[/Equation]
+
+**Definition:** We say, that [Equation]r[/Equation] is a subscale of [Equation]s[/Equation], if [Equation]\operatorname{tonic} r = \operatorname{tonic} s[/Equation] and [Equation]\operatorname{set} r[/Equation] is a subset of [Equation]\operatorname{set} s[/Equation].
+
+We will write this relation as [Equation]r \subset s[/Equation].
+
+In math, we care not about interesting object but also about *trivial* objects. Despite being trivial, they are usually extremely important. For example, a set full of nothing (written as [Equation]\varnothing[/Equation]) is surely trivial, but you can make an universe from it:
+
+[Aside][Von Neumann ordinals](https://en.wikipedia.org/wiki/Ordinal_number#Von_Neumann_definition_of_ordinals). The trick is, though [Equation]\varnothing[/Equation] contains no elements, it is still a set. So [Equation]\{\varnothing\}[/Equation] is not empty.[/Aside]
+
+[Equation display:true]
+\begin{aligned}
+0 &= \{ \} \\
+1 &= \{ \varnothing \} \\
+2 &= \{ \varnothing, \{ \varnothing \} \} \\
+3 &= \{ \varnothing, \{ \varnothing \}, \{ \varnothing, \{ \varnothing \} \} \} \\
+\end{aligned}
+[/Equation]
+
+Returning back to the scales: a *trivial scale* is a scale that contains only its tonic. For example, the trivial scale on C is [Equation](\mathrm{C}, \{\mathrm{C}\})[/Equation].
+
+The trivial subscale of a scale [Equation]s[/Equation] is written as [Equation]0(s)[/Equation].
+
+Now we can define the central concept of the article.
+
+**Definition:** A complement of a scale is a scale with the same tonic as the original scale, which set contains the tonic and the all the notes that do not belong to the original scale.
+
+In symbols:
+
+[Equation display:true]
+s^{\mathsf c} = (\operatorname{tonic} s, \{\operatorname{tonic} s\} \cup (\operatorname{set} s)^{\mathsf c})
+[/Equation]
+
+where [Equation](\operatorname{set} s)^{\mathsf c}[/Equation] is a complement of the scale's set.
+
+[Aside]Remember *negative harmony*?[/Aside]
+Though the title of this article contains the word “anti-scale”, I believe this is a better name for the concept. Surely “anti-scale” is cool and catchy, but by itself it doesn't tell anything. And while “complement” is not so hot, it has the right meaning in both math and music theory.
+
+Scale complement is a duality:
+
+[Equation display:true]
+(s^{\mathsf c})^{\mathsf c} = s
+[/Equation]
+
+So we can say that [Equation]s^{\mathsf c}[/Equation] is a *dual scale* of [Equation]s[/Equation].
+
+If you think that this definiton is not very clear, you're right! Fortunately, with a yet another definition, we can do better.
+
+**Definition:** An extension of scale [Equation]s[/Equation] with a pitch class set [Equation]p[/Equation] (written as [Equation]s \lor p[/Equation]) is the scale [Equation](\operatorname{tonic} s, \operatorname{set} s \cup p)[/Equation]
+
+[Aside][Equation](\mathrm{C\ major}) = (\mathrm{C\ major\ pentatonic}) \lor \{\mathrm{F}, \mathrm{B}\}[/Equation][/Aside]
+We simply add more notes to the scale.
+
+Now we can define the dual scale as
+
+[Equation display:true]
+s^{\mathsf c} = 0(s) \lor (\operatorname{set} s)^{\mathsf c}
+[/Equation]
+
+The dual scale of a scale [Equation]s[/Equation] is the trivial scale of [Equation]s[/Equation] extended with with all the notes that are not in [Equation]s[/Equation].
+
+In similar manner, we can define other set-like operatons of scales:
+
+[Equation display:true]
+\begin{aligned}
+s \lor p &= 0(s) \lor (\operatorname{set} s \cup p) \\
+s \land p &= 0(s) \lor (\operatorname{set} s \cap p) \\
+s \setminus p &= 0(s) \lor (\operatorname{set} s \setminus p)
+\end{aligned}
+[/Equation]
+
+Let's write a transposition by an interval using [Equation]+[/Equation] sign:
+
+[Equation display:true]
+s + I = (\operatorname{tonic} s + I, \operatorname{set} s + I)
+[/Equation]
+
+So, for example [Equation](\text{C\ Major}) + \natural 4 = (\text{F\ Major})[/Equation].
+
+Tonic and set operations commute with [Equation]transposition:[/Equation]
+
+[Equation display:true]
+\begin{aligned}
+\operatorname{tonic} (s + I) &= \operatorname{tonic}(s) + I \\
+\operatorname{set} (s + I) &= \operatorname{set}(s) + I
+\end{aligned}
+[/Equation]
+
+An equiavalence class of sets with respect to transposition is called a *shape*.
+
+# The mighty chain of fifths
+
+The complement of the C major:
+
+```
+               f  C  g  d  a  e  b
+g♭ d♭ a♭ e♭ b♭ _  C
+```
+
+The complement of the E phrygian:
+
+```
+f  c  g  d  a  E  b
+               E  _  f♯ c♯ g♯ d♯ a♯
+```
+
+# References
+
+https://ianring.com/musictheory/scales/
+
