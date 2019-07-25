@@ -45,6 +45,8 @@ There are two natural operations arising from this definiton:
 \end{aligned}
 [/Equation]
 
+Let's also define a subscale.
+
 **Definition:** We say, that [Equation]r[/Equation] is a subscale of [Equation]s[/Equation], if [Equation]\operatorname{tonic} r = \operatorname{tonic} s[/Equation] and [Equation]\operatorname{set} r[/Equation] is a subset of [Equation]\operatorname{set} s[/Equation].
 
 We will write this relation as [Equation]r \subset s[/Equation].
@@ -89,17 +91,17 @@ Scale complement is a duality:
 
 So we can say that [Equation]s^{\mathsf c}[/Equation] is a *dual scale* of [Equation]s[/Equation].
 
-If you think that this definiton is not very clear, you're right! Fortunately, with a yet another definition, we can do better.
+There's also an another way to define the scale complement: via scale extension.
 
-**Definition:** An extension of scale [Equation]s[/Equation] with a pitch class set [Equation]p[/Equation] (written as [Equation]s \lor p[/Equation]) is the scale [Equation](\operatorname{tonic} s, \operatorname{set} s \cup p)[/Equation]
+**Definition:** An extension of scale [Equation]s[/Equation] with a pitch class set [Equation]p[/Equation] (written as [Equation]s \vee p[/Equation]) is the scale [Equation](\operatorname{tonic} s, \operatorname{set} s \cup p)[/Equation]
 
-[Aside][Equation](\mathrm{C\ major}) = (\mathrm{C\ major\ pentatonic}) \lor \{\mathrm{F}, \mathrm{B}\}[/Equation][/Aside]
+[Aside][Equation](\mathrm{C\ major}) = (\mathrm{C\ major\ pentatonic}) \vee \{\mathrm{F}, \mathrm{B}\}[/Equation][/Aside]
 We simply add more notes to the scale.
 
 Now we can define the dual scale as
 
 [Equation display:true]
-s^{\mathsf c} = 0(s) \lor (\operatorname{set} s)^{\mathsf c}
+s^{\mathsf c} = 0(s) \vee (\operatorname{set} s)^{\mathsf c}
 [/Equation]
 
 The dual scale of a scale [Equation]s[/Equation] is the trivial scale of [Equation]s[/Equation] extended with with all the notes that are not in [Equation]s[/Equation].
@@ -108,21 +110,21 @@ In similar manner, we can define other set-like operatons of scales:
 
 [Equation display:true]
 \begin{aligned}
-s \lor p &= 0(s) \lor (\operatorname{set} s \cup p) \\
-s \land p &= 0(s) \lor (\operatorname{set} s \cap p) \\
-s \setminus p &= 0(s) \lor (\operatorname{set} s \setminus p)
+s \vee p &= 0(s) \vee (\operatorname{set} s \cup p) \\
+s \wedge p &= 0(s) \vee (\operatorname{set} s \cap p) \\
+s \setminus p &= 0(s) \vee (\operatorname{set} s \setminus p)
 \end{aligned}
 [/Equation]
 
-Let's write a transposition by an interval using [Equation]+[/Equation] sign:
+Let's write a transposition by an interval using [Equation]+[/Equation] sign. We can define scale transposition as
 
 [Equation display:true]
-s + I = (\operatorname{tonic} s + I, \operatorname{set} s + I)
+s + I = (\operatorname{tonic}(s) + I, \operatorname{set}(s) + I)
 [/Equation]
 
 So, for example [Equation](\text{C\ Major}) + \natural 4 = (\text{F\ Major})[/Equation].
 
-Tonic and set operations commute with [Equation]transposition:[/Equation]
+Tonic and set operations commute with transposition:
 
 [Equation display:true]
 \begin{aligned}
@@ -131,25 +133,191 @@ Tonic and set operations commute with [Equation]transposition:[/Equation]
 \end{aligned}
 [/Equation]
 
-An equiavalence class of sets with respect to transposition is called a *shape*.
+Now we can define the second central concept of the article:
+
+**Definiton:** We say that scale $s$ is *self-complemented* if there exist an interval $I$, such as
+
+[Equation display:true]
+\operatorname{set} s^{\mathsf c} + I \subseteq \operatorname{set} s
+[/Equation]
+
+[Aside]Specifically, an equivalence relation is an equality relation for things that are not equal. For example, similar triangles are not equal and yet they are kinda the same.[/Aside]
+This is “anti-scale equivalence” from the video. We do not use the word “equivalence” here because in math it has a completely different meaning.
+
+Since we now have the notation, let's formulate and proof some trivial theorems.
+
+**Proposition:** Let there's [Equation]I[/Equation] such as
+
+[Equation display:true]
+\operatorname{set} s^{\mathsf c} + I \subseteq \operatorname{set} s
+[/Equation]
+
+Then [Equation](\operatorname{set} s)^{\mathsf c} + I \subset \operatorname{set} s[/Equation].
+
+That means that if a scale is self-complemented, then the transposed complement of the scale set is also a subset of the scale.
+
+The proof is trivial: [Equation]\operatorname{set} s^{\mathsf c} = \{\operatorname{tonic} s\} \cup (\operatorname{set} s)^{\mathsf c} \supset (\operatorname{set} s)^{\mathsf c}[/Equation].
+
+**Proposition:** Let [Equation]r[/Equation] be a self-complemented scale and [Equation]s \supset r[/Equation]. Then [Equation]s[/Equation] is also a self-complemented scale over the same interval [Equation]I[/Equation].
+
+Indeed, let [Equation]s = r \vee p[/Equation]. Then
+[Equation display:true]
+\begin{aligned}
+\operatorname{set} s^{\mathsf c} &=
+\{\operatorname{tonic} r\} \cup (\operatorname{set} r \cup p)^{\mathsf c} \\
+&= \{\operatorname{tonic} r\} \cup (\operatorname{set} r)^{\mathsf c} \setminus p \\
+&= \operatorname{set} r^{\mathsf c} \setminus p \\
+&\subset \operatorname{set} r^{\mathsf c}
+\end{aligned}
+[/Equation]
+
+Notes added to a scale are notes missing in the scale complement.
+
+Sometimes you care not only notes that are in a scale complement, but also about notes that are missing in the transposed complement but are in the original scale. For example, you may wonder if a hole in a complement of a seven notes scale is a perfect fourth above the tonic.
+
+There are some observations:
+
+1. Notes missing in the complement are notes present in the original scale
+2. When we fill the hole, the note is present in both the original scale and the filled complement!
+
+The filled hole is very like a second tonic in respect of the scale complement. Let's explore it
+
+**Definition:** A polytonal scale is a pair [Equation](t, p)[/Equation], where [Equation]t[/Equation] is a set of tonics and [Equation]p \supset t[/Equation] is the scale set.
+
+**Definition:** Let [Equation]s[/Equation] be a polytonal scale. Then the complement of [Equation]s[/Equation] is
+
+[Equation display:true]s^{\mathsf c} = (\operatorname{tonics} s, \operatorname{tonics} s \cup (\operatorname{set} s)^{\mathsf c})[/Equation]
+
+So the problem about scale complement hole turns out to be a problem about bitonal scale self-complemence.
 
 # The mighty chain of fifths
 
-The complement of the C major:
+Four diatonic scales are self-complemented, but other three are not. Why?
+
+We know that all diatonic scales can be constructed from a chain of fifths. For example, the C major:
+
+```
+f  C  g  d  a  e  b
+```
+
+Beside being a good representation for diatonic scale, a chain of fifths has an another cool property: it covers all twelve notes of the equal temperament.
+
+So we can write the complement of C major in chain of fifths representation:
 
 ```
                f  C  g  d  a  e  b
-g♭ d♭ a♭ e♭ b♭ _  C
+g♭ d♭ a♭ e♭ b♭ .  C
 ```
 
-The complement of the E phrygian:
+The symbol `.` means no note. You can easily see that you can align the complement with the original scale with transposing.
+
+In the same way, E phrygian:
 
 ```
 f  c  g  d  a  E  b
-               E  _  f♯ c♯ g♯ d♯ a♯
+               E  .  f♯ c♯ g♯ d♯ a♯
 ```
+
+So far so good. But what if we try G myxolydian?
+
+```
+               f  C  g  d  a  e  b
+g♭ d♭ a♭ e♭ b♭ .  .  G
+```
+
+In the chain of fifths representation, the complement of G myxolydian is *wider* than the original scale and cannot be aligned. And the same is true for dorian and aeolian scales.
+
+# Signal analysis
+
+[Aside]The idea of cross-correlation was borrowed from [A Study of Scales](https://ianring.com/musictheory/scales/) by Ian Ring. This superb article is one of the best texts on music set theory.[/Aside]
+
+An another chain that covers all twelve notes is the chain of semitones. The C major in this representation looks is
+
+```
+C . D . E F . G . A . B
+```
+
+If we replace note names with numbers, starting with 0, we can write this as
+
+```
+0 . 2 . 4 5 . 7 . 9 . 11
+```
+
+We can represent a set as a periodic function:
+
+[Equation display:true]
+p(n) =
+\begin{cases}
+1, & (n \bmod 12) \in p, \\
+0, & \text{otherwise}
+\end{cases}
+[/Equation]
+
+So in the case of the major scale set, [Equation]p(n)[/Equation] is 1 for [Equation]n = 0, 2, 4, 5, 7, 9, 11[/Equation] and is [Equation]p(n)[/Equation] 0 for [Equation]n = 1, 3, 6, 8, 10[/Equation].
+
+Cross-correlation
+
+[Equation display:true]
+(p \star s)(n) = \sum_{0 \leqslant k \leqslant 11} p(k) s(k + n)
+[/Equation]
+
+[Equation]p^{\star 2} = p\star p[/Equation]
+
+[Equation display:true]
+(\chi - p)^{\star 2} = \chi^{\star 2} + p^{\star 2} - 2\chi \star p
+[/Equation]
+
+[Equation]\chi^{\star 2} = 12[/Equation], [Equation]\chi \star p = N_p[/Equation]
+
+[Equation display:true]
+(\chi - p)^{\star 2} = p^{\star 2} + 2(6 - N_p)
+[/Equation]
+
+
+```
+! + + + ! + + + , + + +
+  ! . . . ! . . . *
+
+! + + + ! + + + , + + +
+    ! . . . ! . . . *
+
+! + + + ! + + + , + + +
+      ! . . . ! . . . *
+```
+
+```
+. . a b . . c d . . e f
+```
+
+```
+f . . a b . . c d . . e
+```
+
+```
+. a . b . c . d . e . f
+. f . a . b . c . d . e
+```
+
+```
+. a b . . c d . . e f .
+e f . . a b . . c d . .
+```
+
+# Exploring symmetries
+
+An equiavalence class of sets with respect to transposition is called a *shape*.
+
+[Equation display:true]
+S(s^{\mathsf c}) \subseteq S(s)
+[/Equation]
+
+A shape is called chiral if it equals to it's inversion.
+
+[Equation display:true]
+\sigma = \sigma^\mathsf{inv}
+[/Equation]
+
 
 # References
 
 https://ianring.com/musictheory/scales/
-
