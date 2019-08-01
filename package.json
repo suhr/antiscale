@@ -12,7 +12,7 @@
     }
   },
   "dependencies": {
-    "idyll": "^4.6.0"
+    "idyll": "^4.6.2"
   },
   "devDependencies": {
     "gh-pages": "^0.12.0"
